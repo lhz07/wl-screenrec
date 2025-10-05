@@ -1572,6 +1572,12 @@ fn make_video_params(
             (*enc.as_mut_ptr()).sw_pix_fmt = sw_pix_fmt.into();
         }
     }
+    unsafe {
+        (*enc.as_mut_ptr()).colorspace = ffmpeg::ffi::AVColorSpace::AVCOL_SPC_BT709;
+        (*enc.as_mut_ptr()).color_primaries = ffmpeg::ffi::AVColorPrimaries::AVCOL_PRI_BT709;
+        (*enc.as_mut_ptr()).color_range = ffmpeg::ffi::AVColorRange::AVCOL_RANGE_MPEG;
+        (*enc.as_mut_ptr()).color_trc = ffmpeg::ffi::AVColorTransferCharacteristic::AVCOL_TRC_BT709;
+    }
 
     Ok(enc)
 }
